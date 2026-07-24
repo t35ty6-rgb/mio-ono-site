@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#5eb9d6">
+<title>ルーレット開催中｜MIO × TOKYO OUTDOOR SHOW 出店記念</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   A4 portrait (210 × 297mm) booth poster
+   single vertical flow, 6 sections
+   ============================================ */
+:root{
+  --sky:#5eb9d6;
+  --sky-deep:#2a7a98;
+  --sky-light:#7ec8e3;
+  --ink:#0f2a3a;
+  --ink-2:#4a6b7c;
+  --ink-3:#8a9eaa;
+  --shu:#d63a1e;
+  --shu-deep:#a02711;
+  --gold:#e6b73a;
+  --line-green:#06c755;
+  --hair:#dde6ec;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --mono:'Inter','Noto Sans JP',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+html,body{
+  background:#1a3a4f;color:var(--ink);
+  font-family:var(--sans);font-weight:500;font-feature-settings:"palt";
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+
+/* ===== Print / A4 ===== */
+@page{size:A4 portrait;margin:0}
+@media print{
+  html,body{background:#fff}
+  .poster{box-shadow:none;margin:0}
+}
+/* On-screen: center A4 sheet on dark backdrop */
+body{display:flex;align-items:flex-start;justify-content:center;min-height:100vh;padding:20px 10px}
+@media (max-width:740px){body{padding:0}}
+
+/* ===== A4 sheet ===== */
+.poster{
+  width:210mm;height:297mm;
+  background:#fff;overflow:hidden;
+  position:relative;
+  display:grid;
+  grid-template-rows: 70mm 28mm 78mm 90mm 31mm;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.4);
+}
+
+/* ============ SECTION 1: TOP STRIP (sky bg, タイアップロゴ) ============ */
+.s-top{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 100%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14mm;
+}
+.s-top::before{
+  /* mountains silhouette at bottom of top strip + section2 area */
+  content:"";position:absolute;left:0;right:0;bottom:-50mm;height:80mm;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 600' preserveAspectRatio='none'><path d='M0,600 L0,360 C160,300 300,330 400,290 C520,250 620,290 760,250 C880,220 1000,260 1140,230 C1280,210 1420,250 1600,220 L1600,600 Z' fill='rgba(255,255,255,0.18)'/><path d='M0,600 L0,440 C140,390 280,410 420,370 C560,340 700,380 840,350 C980,330 1120,360 1280,340 C1440,330 1540,360 1600,350 L1600,600 Z' fill='rgba(255,255,255,0.28)'/><path d='M0,600 L0,510 C200,490 400,500 600,480 C800,470 1000,490 1200,470 C1400,470 1500,490 1600,480 L1600,600 Z' fill='rgba(255,255,255,0.45)'/></svg>") no-repeat bottom / cover;
+  z-index:0;
+}
+.s-top > *{position:relative;z-index:1}
+
+.s-top .left{
+  font-family:var(--mono);font-size:8pt;font-weight:800;letter-spacing:.28em;
+  color:rgba(255,255,255,.85);text-transform:uppercase;
+}
+.s-top .tieup{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;
+  border:2px solid var(--ink);
+  padding:9px 18px;border-radius:99px;
+  box-shadow:0 8px 18px -8px rgba(0,0,0,.3);
+}
+.s-top .tieup img{height:24px;width:auto;display:block}
+.s-top .tieup .x{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--ink-3);line-height:1}
+.s-top .tieup .tos{
+  display:flex;flex-direction:column;line-height:1;
+  font-family:var(--mono);font-weight:900;letter-spacing:.02em;
+}
+.s-top .tieup .tos .row{display:flex;gap:5px;font-size:13pt}
+.s-top .tieup .tos .row .tt{color:#1a2e63}
+.s-top .tieup .tos .row .to{color:#d63a1e}
+.s-top .tieup .tos .row .ts{color:#2d8a3e}
+.s-top .tieup .tos .yr{font-family:var(--mono);font-size:8pt;letter-spacing:.28em;color:var(--ink-3);font-weight:800;margin-top:3px}
+.s-top .badge{
+  display:flex;align-items:center;gap:7px;
+  background:var(--shu);color:#fff;
+  padding:5px 12px;border-radius:99px;
+  font-family:var(--mono);font-size:8pt;font-weight:900;letter-spacing:.22em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.s-top .badge .pulse{
+  width:7px;height:7px;border-radius:50%;background:#fff;
+  animation:pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+/* ============ SECTION 2: TITLE (sky bg continues, BIG title) ============ */
+.s-title{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(180deg, var(--sky) 0%, var(--sky-deep) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:6mm 14mm;
+}
+.s-title .eyebrow{
+  display:inline-block;font-size:11pt;font-weight:700;letter-spacing:.32em;
+  color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);
+  padding:5px 16px;border-radius:99px;margin-bottom:8mm;
+  backdrop-filter:blur(6px);
+}
+.s-title h1{
+  font-weight:900;font-size:64pt;letter-spacing:.02em;line-height:1;
+  margin-bottom:4mm;text-shadow:0 6px 20px rgba(0,0,0,.3);
+  white-space:nowrap;
+}
+.s-title h1 em{font-style:normal;color:var(--gold)}
+.s-title .urgency{
+  display:inline-flex;align-items:stretch;
+  background:#fff;border:2px solid var(--ink);border-radius:8px;overflow:hidden;
+  box-shadow:0 10px 24px -12px rgba(0,0,0,.4);
+}
+.s-title .urgency .u{
+  padding:7px 18px;font-size:11pt;font-weight:800;color:var(--ink);letter-spacing:.1em;
+  border-right:1px solid var(--hair);
+}
+.s-title .urgency .u:last-child{border-right:none}
+.s-title .urgency .u b{color:var(--shu);font-weight:900}
+.s-title .urgency .u.pct{
+  background:var(--shu);color:#fff;font-family:var(--mono);font-weight:900;letter-spacing:0;
+}
+
+/* ============ SECTION 3: PRIZE BANNER (white, 中央 大 highlight) ============ */
+.s-prize{
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  padding:0 14mm;
+}
+.prize{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:8px 30px 7px;border-radius:14px;
+  background:#fff;color:var(--shu);line-height:1.3;
+  border:3px solid var(--shu);
+  box-shadow:0 10px 24px -12px rgba(214,58,30,.4);
+}
+.prize-top{
+  display:flex;align-items:center;gap:14px;
+  font-size:18pt;font-weight:900;letter-spacing:.04em;line-height:1;color:var(--shu);
+}
+.prize-top .star{font-family:var(--mono);color:var(--shu);font-size:1em}
+.prize-top b{font-family:var(--mono);font-weight:900;font-size:1.15em;color:var(--shu);letter-spacing:-.02em}
+.prize-gifts{
+  font-size:12.5pt;font-weight:700;letter-spacing:.06em;color:var(--ink);
+  display:flex;align-items:center;gap:10px;
+}
+.prize-gifts .plus{font-family:var(--mono);font-weight:900;color:var(--shu)}
+.prize-gifts em{font-style:normal;color:var(--shu);font-weight:900}
+
+/* ============ SECTION 4: 2 QR CARDS (PayPay + LINE 大) ============ */
+.s-qr{
+  background:#fff;padding:4mm 14mm 4mm;
+  display:grid;grid-template-columns:1fr 1fr;gap:8mm;
+}
+.qr-card{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:8mm 8mm 7mm;border-radius:12px;background:#fff;border:3px solid;
+  box-shadow:0 12px 24px -12px rgba(0,0,0,.25);
+}
+.qr-card.is-pay{border-color:var(--shu)}
+.qr-card.is-line{border-color:var(--line-green)}
+.qr-card .lbl{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:9pt;font-weight:800;letter-spacing:.28em;text-transform:uppercase;
+}
+.qr-card.is-pay .lbl{color:var(--shu)}
+.qr-card.is-line .lbl{color:var(--line-green)}
+.qr-card .lbl::before{
+  content:"";display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:5px;color:#fff;
+  font-family:var(--mono);font-weight:900;font-size:12pt;letter-spacing:0;line-height:1;
+}
+.qr-card.is-pay .lbl::before{content:"P";background:var(--shu)}
+.qr-card.is-line .lbl::before{content:"L";background:var(--line-green)}
+.qr-card .ttl{
+  font-size:14pt;font-weight:900;color:var(--ink);letter-spacing:.04em;
+}
+.qr-card img{
+  width:auto;height:100%;max-height:42mm;max-width:42mm;display:block;object-fit:contain;background:#fff;flex:1;min-height:0;
+}
+
+/* ============ SECTION 5: PRODUCTS (3 cards 横並び) ============ */
+.s-products{
+  background:#fff;padding:4mm 14mm 5mm;
+  border-top:1px solid var(--hair);
+}
+.s-products .pheader{
+  display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4mm;
+}
+.s-products .pheader .left{
+  font-family:var(--mono);font-size:9pt;font-weight:800;letter-spacing:.32em;color:var(--sky-deep);text-transform:uppercase;
+}
+.s-products .pheader .mid{
+  font-size:13pt;font-weight:900;color:var(--ink);letter-spacing:.04em;
+}
+.s-products .pheader .mid em{font-style:normal;color:var(--shu);position:relative}
+.s-products .pheader .mid em::after{content:"";position:absolute;left:-1px;right:-1px;bottom:1px;height:6px;background:rgba(214,58,30,.18);z-index:-1;border-radius:1px}
+.s-products .pheader .right{
+  font-size:9pt;font-weight:600;color:var(--ink-2);letter-spacing:.2em;
+}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm}
+.prod{
+  display:grid;grid-template-rows:auto 1fr auto;
+  border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:#fff;
+  box-shadow:0 8px 18px -12px rgba(0,0,0,.2);
+}
+.prod .maker{
+  position:relative;height:14mm;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0f2a3a;
+}
+.prod .maker .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.prod .maker .ov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,42,58,.85) 0%,rgba(15,42,58,.3) 60%,rgba(15,42,58,0.05) 100%)}
+.prod .maker .mt{position:relative;z-index:1;padding:4px 10px 5px;line-height:1.2;width:100%}
+.prod .maker .role{font-family:var(--mono);font-size:7pt;font-weight:800;letter-spacing:.2em;color:#9ec7d8;text-transform:uppercase;margin-bottom:1px}
+.prod .maker .nm{font-size:10pt;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prod .photo{
+  background-size:contain;background-position:center;background-repeat:no-repeat;
+  background-color:#f5fafd;min-height:30mm;
+}
+.prod .meta{
+  padding:6px 10px 8px;text-align:center;border-top:1px solid var(--hair);
+}
+.prod .meta .cat{font-family:var(--mono);font-size:8pt;font-weight:800;letter-spacing:.22em;color:var(--sky-deep);text-transform:uppercase;margin-bottom:2px}
+.prod .meta .nm{font-size:11pt;font-weight:700;color:var(--ink);letter-spacing:.04em;line-height:1.3;margin-bottom:3px}
+.prod .meta .price{font-family:var(--mono);font-size:12pt;font-weight:900;color:var(--ink)}
+.prod .meta .price small{font-family:var(--sans);font-weight:500;color:var(--ink-3);font-size:8pt;margin-left:3px;letter-spacing:.06em}
+.prod .meta .disc{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-top:5px;padding-top:5px;border-top:1px dashed var(--hair);
+}
+.prod .meta .disc .d{
+  display:flex;flex-direction:column;align-items:center;gap:1px;
+  font-family:var(--mono);font-weight:800;line-height:1;
+}
+.prod .meta .disc .pc{font-size:7pt;letter-spacing:.04em;color:var(--ink-3)}
+.prod .meta .disc .v{font-size:9.5pt;color:var(--shu)}
+.prod .meta .disc .d.is-max{background:var(--shu);color:#fff;border-radius:3px;padding:3px 1px}
+.prod .meta .disc .d.is-max .pc{color:rgba(255,255,255,.85)}
+.prod .meta .disc .d.is-max .v{color:#fff;font-size:10pt}
+
+/* ============ SECTION 6: FOOTER (brand statement) ============ */
+.s-foot{
+  background:var(--ink);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:0 14mm;gap:4px;
+}
+.s-foot .jp{font-size:14pt;font-weight:700;letter-spacing:.32em;color:#fff}
+.s-foot .en{
+  font-family:var(--mono);font-size:8pt;font-weight:700;letter-spacing:.3em;
+  color:rgba(255,255,255,.7);text-transform:uppercase;
+}
+.s-foot .en b{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- ========== 1. TITLE BLOCK ========== -->
+  <section class="s-title">
+    <div class="eyebrow">出店記念キャンペーン</div>
+    <h1>ルーレット <em>開催中</em></h1>
+    <div class="urgency">
+      <div class="u">会期中 <b>限定</b></div>
+      <div class="u">お見逃しなく</div>
+      <div class="u pct">5% / 10% / 20% OFF</div>
+    </div>
+  </section>
+
+  <!-- ========== 3. PRIZE BANNER ========== -->
+  <section class="s-prize">
+    <div class="prize">
+      <div class="prize-top">
+        <span class="star">★</span>
+        <span>ハズレなし、<b>参加者全員</b>プレゼント</span>
+        <span class="star">★</span>
+      </div>
+      <div class="prize-gifts">
+        <span>割引クーポン</span>
+        <span class="plus">＋</span>
+        <span><em>オリジナルうちわ</em></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. 2 QR (PayPay + LINE) ========== -->
+  <section class="s-qr">
+    <div class="qr-card is-pay">
+      <div class="lbl">お支払い</div>
+      <div class="ttl">お支払いはこちら</div>
+      <img src="assets/img/booth/paypay-qr.png?v=4" alt="PayPay 支払い用 QR コード">
+    </div>
+    <div class="qr-card is-line">
+      <div class="lbl">LINE 登録</div>
+      <div class="ttl">LINE 登録はこちら</div>
+      <img src="assets/img/booth/line-qr.png" alt="MIO 公式 LINE 友だち追加 QR コード">
+    </div>
+  </section>
+
+  <!-- ========== 5. PRODUCTS ========== -->
+  <section class="s-products">
+    <div class="pheader">
+      <div class="left">MIO ONLINE STORE</div>
+      <div class="mid">大野の匠が手がけた、<em>本物のアウトドア道具</em>。</div>
+      <div class="right"></div>
+    </div>
+    <div class="products-grid">
+      <div class="prod">
+        <div class="maker">
+          <div class="bg" style="background-image:url('assets/img/products/sunglasses/maker-01-lens-coating.jpg')"></div>
+          <div class="ov"></div>
+          <div class="mt">
+            <div class="role">光学レンズ製造</div>
+            <div class="nm">エツミ光学</div>
+          </div>
+        </div>
+        <div class="photo" style="background-image:url('assets/img/sunglasses.jpg')"></div>
+        <div class="meta">
+          <div class="cat">EYEWEAR</div>
+          <div class="nm">星空観望用サングラス</div>
+          <div class="price">¥19,000<small>税込</small></div>
+          <div class="disc">
+            <div class="d"><span class="pc">5%OFF</span><span class="v">¥18,050</span></div>
+            <div class="d"><span class="pc">10%OFF</span><span class="v">¥17,100</span></div>
+            <div class="d is-max"><span class="pc">20%OFF</span><span class="v">¥15,200</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="maker">
+          <div class="bg" style="background-image:url('assets/img/products/teppan/maker-01-hokkoh-meeting.jpg')"></div>
+          <div class="ov"></div>
+          <div class="mt">
+            <div class="role">鉄工三社の共創</div>
+            <div class="nm">加藤鉄工 × 北鋼 × unumPlate</div>
+          </div>
+        </div>
+        <div class="photo" style="background-image:url('assets/img/teppan.jpg')"></div>
+        <div class="meta">
+          <div class="cat">COOKWARE</div>
+          <div class="nm">荒島プレート</div>
+          <div class="price">¥35,000<small>税込</small></div>
+          <div class="disc">
+            <div class="d"><span class="pc">5%OFF</span><span class="v">¥33,250</span></div>
+            <div class="d"><span class="pc">10%OFF</span><span class="v">¥31,500</span></div>
+            <div class="d is-max"><span class="pc">20%OFF</span><span class="v">¥28,000</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="prod">
+        <div class="maker">
+          <div class="bg" style="background-image:url('assets/img/products/firepit/maker-04-tig-closeup.jpg')"></div>
+          <div class="ov"></div>
+          <div class="mt">
+            <div class="role">TIG 溶接</div>
+            <div class="nm">タニコーテック</div>
+          </div>
+        </div>
+        <div class="photo" style="background-image:url('assets/img/firepit.jpg')"></div>
+        <div class="meta">
+          <div class="cat">FIRE</div>
+          <div class="nm">ロッカクファイヤーピット</div>
+          <div class="price">¥35,000<small>税込</small></div>
+          <div class="disc">
+            <div class="d"><span class="pc">5%OFF</span><span class="v">¥33,250</span></div>
+            <div class="d"><span class="pc">10%OFF</span><span class="v">¥31,500</span></div>
+            <div class="d is-max"><span class="pc">20%OFF</span><span class="v">¥28,000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. FOOTER ========== -->
+  <section class="s-foot">
+    <div class="jp">大野の匠を、全国に。</div>
+    <div class="en">MIO ／ Made in Ono ・ <b>大野商工会議所</b> ・ TOKYO OUTDOOR SHOW 2026</div>
+  </section>
+
+</div>
+
+</body>
+</html>
