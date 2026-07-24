@@ -51,6 +51,13 @@
     });
     // Product cards get stagger by position
     document.querySelectorAll(PROD_SELECTOR).forEach((el, i) => attach(el, i));
+    // Fallback: if any reveal element is still hidden after 2s, force show it
+    // (defends against IntersectionObserver missing on SP under certain scroll patterns)
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => {
+        el.classList.add('is-visible');
+      });
+    }, 2000);
   }
 
   /* Hero SCROLL indicator: fade + slight drift as user scrolls */
@@ -149,9 +156,70 @@
     });
   }
 
+  /* SP hamburger menu — inject button + drawer into .nav */
+  function hookHamburger(){
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const inner = nav.querySelector('.nav-inner');
+    const links = nav.querySelector('.nav-links');
+    if (!inner || !links) return;
+    if (inner.querySelector('.nav-burger')) return;
+
+    const burger = document.createElement('button');
+    burger.className = 'nav-burger';
+    burger.setAttribute('aria-label', 'メニューを開く');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.innerHTML = '<span></span><span></span><span></span>';
+    inner.appendChild(burger);
+
+    // Build drawer from existing nav-links + optional cart
+    const drawer = document.createElement('div');
+    drawer.className = 'nav-drawer';
+    drawer.setAttribute('aria-hidden', 'true');
+    const drawerInner = document.createElement('div');
+    drawerInner.className = 'nav-drawer-inner';
+    // clone anchors
+    links.querySelectorAll('a').forEach(a => {
+      const c = a.cloneNode(true);
+      drawerInner.appendChild(c);
+    });
+    // add contact link
+    const contact = document.createElement('a');
+    contact.href = 'index.html#contact';
+    contact.textContent = 'お問い合わせ';
+    drawerInner.appendChild(contact);
+    drawer.appendChild(drawerInner);
+    document.body.appendChild(drawer);
+
+    function close(){
+      drawer.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function open(){
+      drawer.classList.add('is-open');
+      burger.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    burger.addEventListener('click', () => {
+      if (drawer.classList.contains('is-open')) close(); else open();
+    });
+    drawer.addEventListener('click', e => {
+      if (e.target === drawer || e.target.tagName === 'A') close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+    });
+  }
+
   function init(){
     hookHeroScroll();
     hookNav();
+    hookHamburger();
     hookParallax();
     hookSmoothAnchors();
     attachAll();

@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "skeleton-corp-site"
+  },
+  "targets": {
+    "skeleton-corp-site": {
+      "hosting": {
+        "mio-ono": ["mio-ono"]
+      }
+    }
+  }
+}
