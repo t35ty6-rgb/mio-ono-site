@@ -212,10 +212,10 @@
         "main": "assets/img/products/lager/main.jpg",
         "thumbs": [
           "assets/img/products/lager/main.jpg",
-          "assets/img/products/lager/detail-03-launch.jpg",
-          "assets/img/products/lager/detail-04-spring.jpg",
-          "assets/img/products/lager/detail-01-mio-letter.jpg",
-          "assets/img/products/lager/detail-02-can-closeup.jpg"
+          "assets/img/products/lager/detail-01-glass.jpg",
+          "assets/img/products/lager/detail-02-spring.jpg",
+          "assets/img/products/lager/detail-03-brewer.jpg",
+          "assets/img/products/lager/detail-04-malt.jpg"
         ]
       },
       "specs": [
