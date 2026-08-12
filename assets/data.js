@@ -103,9 +103,16 @@
     renderPDP(p){
       const price = priceParts(p);
       const hasVariants = Array.isArray(p.variants) && p.variants.length > 0;
-      const defaultLink = hasVariants ? (p.variants[0].paymentLink || p.paymentLink) : p.paymentLink;
+      const external = p.externalPurchase && p.externalPurchase.url ? p.externalPurchase : null;
+      const defaultLink = external ? external.url
+                        : hasVariants ? (p.variants[0].paymentLink || p.paymentLink)
+                        : p.paymentLink;
       // 決済リンクが未設定 (空 / 「REPLACE_」 placeholder) なら CTA を無効化して 「準備中」 表示にする
       const isLinkReady = defaultLink && !/REPLACE_/.test(defaultLink) && defaultLink !== '#';
+      const ctaLabel = external ? `${external.ctaLabel || (external.siteName + ' 公式サイトで購入する')} ↗`
+                     : 'この商品を注文する →';
+      const stickyLabel = external ? `${external.siteName || '公式サイト'}で購入 ↗` : '注文する →';
+      const ctaAttrs = external ? 'target="_blank" rel="noopener"' : '';
       const variantsHtml = hasVariants ? `
     <div class="pdp-variants" data-pdp-variants>
       <div class="pdp-variants-label">${escapeHtml(p.variantLabel || 'カラー')}<span class="pdp-variants-selected" data-variant-selected>${escapeHtml(p.variants[0].label)}</span></div>
@@ -169,8 +176,8 @@
       </div>
       <div class="pdp-actions">
         ${isLinkReady
-          ? `<a class="btn-cart" href="${escapeHtml(defaultLink)}" data-buy-link>この商品を注文する →</a>`
-          : `<button class="btn-cart btn-cart-disabled" disabled title="決済リンクが商工会議所より発行され次第、注文可能になります">準備中 — まもなく販売開始</button>`}
+          ? `<a class="btn-cart" href="${escapeHtml(defaultLink)}" data-buy-link ${ctaAttrs}>${escapeHtml(ctaLabel)}</a>`
+          : `<button class="btn-cart btn-cart-disabled" disabled title="${external ? '販売パートナー様の公式サイト URL 準備中' : '決済リンクが商工会議所より発行され次第、注文可能になります'}">準備中 — まもなく販売開始</button>`}
         <button class="btn-fav" aria-label="お気に入りに追加">♡</button>
       </div>
       <div class="pdp-meta-inline">
@@ -198,7 +205,7 @@
       <div class="pdp-sticky-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>
     </div>
     ${isLinkReady
-      ? `<a class="pdp-sticky-cta" href="${escapeHtml(defaultLink)}" data-buy-link>注文する →</a>`
+      ? `<a class="pdp-sticky-cta" href="${escapeHtml(defaultLink)}" data-buy-link ${ctaAttrs}>${escapeHtml(stickyLabel)}</a>`
       : `<button class="pdp-sticky-cta pdp-sticky-cta-disabled" disabled>準備中</button>`}
   </div>
 </div>

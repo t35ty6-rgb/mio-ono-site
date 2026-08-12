@@ -16,14 +16,27 @@
       {
         "source": "**/*.@(json)",
         "headers": [
-          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, must-revalidate"
+          }
         ]
       },
       {
         "source": "**/*.@(html)",
         "headers": [
-          { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, must-revalidate"
+          }
         ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/lager",
+        "destination": "/product.html?slug=lager",
+        "type": 301
       }
     ]
   }

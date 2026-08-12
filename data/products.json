@@ -240,32 +240,13 @@
           "value": "2026年8月（MIO ブランド第4号品）"
         }
       ],
-      "note": "この商品は <strong>2026年8月 発売予定</strong> の新商品です。決済ページの準備中は「準備中」表示となります。販売開始次第、こちらのボタンから購入いただけるようになります。<br>お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中や授乳期の飲酒はお控えください。",
-      "variantLabel": "本数",
-      "variants": [
-        {
-          "key": "single",
-          "label": "1本",
-          "sublabel": "まずは 味を 確かめたい方に",
-          "swatch": "#4a8ac9",
-          "paymentLink": "REPLACE_WITH_LAGER_SINGLE_PAYMENT_LINK"
-        },
-        {
-          "key": "sixpack",
-          "label": "6本セット",
-          "sublabel": "自宅の 食卓に、来客への 手土産に",
-          "swatch": "#2a6a8a",
-          "paymentLink": "REPLACE_WITH_LAGER_SIXPACK_PAYMENT_LINK"
-        },
-        {
-          "key": "twelvepack",
-          "label": "12本セット",
-          "sublabel": "友人と 分ける、贈答用にも",
-          "swatch": "#144a6a",
-          "paymentLink": "REPLACE_WITH_LAGER_TWELVEPACK_PAYMENT_LINK"
-        }
-      ],
-      "paymentLink": "REPLACE_WITH_LAGER_SINGLE_PAYMENT_LINK",
+      "note": "販売は <strong>アワーブリウィング</strong> 様 が 行います (酒類 販売業免許 保有)。 大野商工会議所 は 酒類 販売業免許 を 保有していない ため、 購入 は アワーブリウィング様 公式サイト に 遷移 して 完結 します。<br>お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中や授乳期の飲酒はお控えください。",
+      "externalPurchase": {
+        "siteName": "アワーブリウィング",
+        "url": "REPLACE_WITH_OURBREWING_URL",
+        "ctaLabel": "アワーブリウィング公式サイトで購入する"
+      },
+      "paymentLink": "REPLACE_WITH_OURBREWING_URL",
       "stripeProductId": "",
       "displayOrder": 4
     }
