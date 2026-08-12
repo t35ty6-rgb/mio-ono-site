@@ -125,9 +125,9 @@
         `<dl><dt>${escapeHtml(s.label)}</dt><dd>${escapeHtml(s.value)}</dd></dl>`
       ).join('');
       const thumbList = (p.images.thumbs || [p.images.main]);
-      const thumbsHtml = thumbList.map((src,i) =>
+      const thumbsHtml = thumbList.length > 1 ? thumbList.map((src,i) =>
         `<div class="pdp-thumb${i===0?' active':''}" data-src="${escapeHtml(src)}"><img src="${escapeHtml(src)}" alt=""></div>`
-      ).join('');
+      ).join('') : '';
       const badgeHtml = p.badge ? `<div class="badge">${escapeHtml(p.badge)}</div>` : '';
       const shippingHtml = (p.shippingFee && p.shippingFee > 0) ? `全国一律 ¥${p.shippingFee.toLocaleString('ja-JP')}（地域により異なる場合あり）` : '送料無料（全国一律）';
 
