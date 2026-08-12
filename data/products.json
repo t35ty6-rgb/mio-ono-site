@@ -1,7 +1,7 @@
 {
   "_meta": {
     "source": "manually maintained (Stripe アカウントは大野商工会議所さま側で開設)",
-    "updatedAt": "2026-06-16T09:22:17.047Z",
+    "updatedAt": "2026-08-12T02:15:00.000Z",
     "syncMode": "live",
     "note": "本ファイルは大野商工会議所さま 所有の Stripe アカウントと連携済。 商品の追加・修正は Stripe ダッシュボードまたは制作チームへご連絡ください。",
     "priceConvention": "priceTaxIncluded を正、priceTaxExcluded は内訳表示用（背計算値）。表示は税込総額をプライマリに（景品表示法 総額表示義務）",
@@ -187,6 +187,91 @@
       "paymentLink": "https://buy.stripe.com/7sY5kF0H32X784L5vd8g007",
       "stripeProductId": "prod_UiJpNULR8ebu9S",
       "displayOrder": 3
+    },
+    {
+      "id": "prod_DEMO_lager",
+      "slug": "lager",
+      "active": true,
+      "name": "大野名水ラガー",
+      "category": "BEVERAGE",
+      "categoryJa": "クラフトビール",
+      "maker": "MIO CRAFT BREWERY",
+      "shortDescription": "140年の井戸から汲みあげる、大野の名水で仕込んだクラフトラガー。軟水だからこそ映える、澄んだ喉ごしと素直な麦の香り。",
+      "description": "福井県大野市は、環境省の名水百選に選ばれた「御清水（おしょうず）」をはじめ、まちのあちこちで湧き水がそのまま生活に溶け込んでいるまちです。\nこの大野名水ラガーは、地元で140年以上使われつづける井戸の軟水で仕込みました。\n軟水はビールの雑味を包み、ラガー本来の澄んだ喉ごしと素直な麦の香りを際立たせます。副原料はできる限り抑え、水と麦とホップの素直な味だけで仕上げた、大野の水を「飲む」ためのビールです。\nMIO CRAFT BREWERY が MIO ブランド第4弾として造る、初のクラフトビール。星空観望のあと、鉄板を囲む食卓のあと、焚き火のそばで — 大野の道具たちの隣に置いてほしい一本です。",
+      "priceTaxIncluded": 748,
+      "priceTaxExcluded": 680,
+      "taxRate": 0.1,
+      "currency": "JPY",
+      "shippingFee": 0,
+      "leadTimeText": "ご注文から3〜5営業日でお届け（在庫がある場合）",
+      "tag": "NEW｜第4弾",
+      "tagStyle": "shu",
+      "badge": "MIO 第4号品",
+      "stockStatus": "coming_soon",
+      "images": {
+        "main": "assets/img/products/lager/main.jpg",
+        "thumbs": [
+          "assets/img/products/lager/main.jpg",
+          "assets/img/products/lager/detail-03-launch.jpg",
+          "assets/img/products/lager/detail-04-spring.jpg",
+          "assets/img/products/lager/detail-01-mio-letter.jpg",
+          "assets/img/products/lager/detail-02-can-closeup.jpg"
+        ]
+      },
+      "specs": [
+        {
+          "label": "スタイル",
+          "value": "ラガー（下面発酵）"
+        },
+        {
+          "label": "内容量",
+          "value": "350ml 缶"
+        },
+        {
+          "label": "仕込み水",
+          "value": "大野市内の井戸水（軟水／140年の井戸）"
+        },
+        {
+          "label": "原材料",
+          "value": "麦芽・ホップ（副原料 極少）"
+        },
+        {
+          "label": "醸造",
+          "value": "MIO CRAFT BREWERY ／ 福井県大野市"
+        },
+        {
+          "label": "発売",
+          "value": "2026年8月（MIO ブランド第4号品）"
+        }
+      ],
+      "note": "この商品は <strong>2026年8月 発売予定</strong> の新商品です。決済ページの準備中は「準備中」表示となります。販売開始次第、こちらのボタンから購入いただけるようになります。<br>お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中や授乳期の飲酒はお控えください。",
+      "variantLabel": "本数",
+      "variants": [
+        {
+          "key": "single",
+          "label": "1本",
+          "sublabel": "まずは 味を 確かめたい方に",
+          "swatch": "#4a8ac9",
+          "paymentLink": "REPLACE_WITH_LAGER_SINGLE_PAYMENT_LINK"
+        },
+        {
+          "key": "sixpack",
+          "label": "6本セット",
+          "sublabel": "自宅の 食卓に、来客への 手土産に",
+          "swatch": "#2a6a8a",
+          "paymentLink": "REPLACE_WITH_LAGER_SIXPACK_PAYMENT_LINK"
+        },
+        {
+          "key": "twelvepack",
+          "label": "12本セット",
+          "sublabel": "友人と 分ける、贈答用にも",
+          "swatch": "#144a6a",
+          "paymentLink": "REPLACE_WITH_LAGER_TWELVEPACK_PAYMENT_LINK"
+        }
+      ],
+      "paymentLink": "REPLACE_WITH_LAGER_SINGLE_PAYMENT_LINK",
+      "stripeProductId": "",
+      "displayOrder": 4
     }
   ]
 }
