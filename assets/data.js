@@ -118,7 +118,7 @@
       const isLinkReady = !soldOut && defaultLink && !/REPLACE_/.test(defaultLink) && defaultLink !== '#';
       const ctaLabel = external ? `${external.ctaLabel || (external.siteName + ' 公式サイトで購入する')} ↗`
                      : 'この商品を注文する →';
-      const stickyLabel = external ? `${external.siteName || '公式サイト'}で購入 ↗` : '注文する →';
+      const stickyLabel = external ? `${external.stickyLabel || (external.siteName || '公式サイト') + 'で購入'} ↗` : '注文する →';
       const disabledCtaLabel = soldOut ? SOLD_OUT_LABEL
                              : external ? '販売パートナー様の公式サイト URL 準備中'
                              : '準備中 — まもなく販売開始';

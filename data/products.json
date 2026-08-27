@@ -206,9 +206,9 @@
       "freeShippingThreshold": 7000,
       "orderUnitText": "3本または6本単位でご購入いただけます（1本単位のご注文は承れません）",
       "leadTimeText": "ご注文から3〜5営業日でお届け（在庫がある場合）",
-      "tag": "MIO 第4号品",
+      "tag": "予約販売受付中",
       "tagStyle": "shu",
-      "badge": "MIO 第4号品",
+      "badge": "予約販売受付中",
       "stockStatus": "available",
       "images": {
         "main": "assets/img/products/lager/main.jpg",
@@ -246,7 +246,8 @@
       "externalPurchase": {
         "siteName": "アワーブリウィング",
         "url": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414244395",
-        "ctaLabel": "アワーブリウィング公式サイトで購入する",
+        "ctaLabel": "予約販売｜アワーブリウィング公式サイトへ",
+        "stickyLabel": "予約販売｜アワーブリウィングへ",
         "contactEmail": "contact@ourbrewing.com"
       },
       "paymentLink": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414244395",
