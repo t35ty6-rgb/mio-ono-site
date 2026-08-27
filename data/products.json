@@ -202,12 +202,14 @@
       "priceTaxExcluded": 680,
       "taxRate": 0.1,
       "currency": "JPY",
-      "shippingFee": 0,
+      "shippingFee": 900,
+      "freeShippingThreshold": 7000,
+      "orderUnitText": "3本または6本単位でご購入いただけます（1本単位のご注文は承れません）",
       "leadTimeText": "ご注文から3〜5営業日でお届け（在庫がある場合）",
-      "tag": "NEW｜第4弾",
+      "tag": "MIO 第4号品",
       "tagStyle": "shu",
       "badge": "MIO 第4号品",
-      "stockStatus": "coming_soon",
+      "stockStatus": "available",
       "images": {
         "main": "assets/img/products/lager/main.jpg",
         "thumbs": [
@@ -240,13 +242,14 @@
           "value": "2026年8月（MIO ブランド第4号品）"
         }
       ],
-      "note": "販売は <strong>アワーブリウィング</strong> 様 が 行います (酒類 販売業免許 保有)。 大野商工会議所 は 酒類 販売業免許 を 保有していない ため、 購入 は アワーブリウィング様 公式サイト に 遷移 して 完結 します。<br>お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中や授乳期の飲酒はお控えください。",
+      "note": "販売は <strong>アワーブリウィング</strong> 様 が 行います（酒類販売業免許 保有）。大野商工会議所は酒類販売業免許を保有していないため、決済・配送・お問い合わせは アワーブリウィング様公式サイトにて完結します。<br><strong>ご購入単位：</strong>3本または6本単位でお願いいたします（1本単位のご注文は承れません）。<br><strong>送料：</strong>全国一律 900円（税込）／ 7,000円（税込）以上のご購入で送料無料。<br><strong>本商品に関するお問い合わせ：</strong><a href=\"mailto:contact@ourbrewing.com\">contact@ourbrewing.com</a>（アワーブリウィング様）<br>お酒は20歳になってから。飲酒運転は法律で禁止されています。妊娠中や授乳期の飲酒はお控えください。",
       "externalPurchase": {
         "siteName": "アワーブリウィング",
-        "url": "REPLACE_WITH_OURBREWING_URL",
-        "ctaLabel": "アワーブリウィング公式サイトで購入する"
+        "url": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414244395",
+        "ctaLabel": "アワーブリウィング公式サイトで購入する",
+        "contactEmail": "contact@ourbrewing.com"
       },
-      "paymentLink": "REPLACE_WITH_OURBREWING_URL",
+      "paymentLink": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414244395",
       "stripeProductId": "",
       "displayOrder": 4
     }

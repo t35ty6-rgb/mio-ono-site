@@ -165,6 +165,9 @@ section{padding:120px 24px}
 .prod-bottom{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:18px;font-family:var(--serif)}
 .prod-price strong{font-size:22px;font-weight:500;color:var(--ink)}
 .prod-price span{font-size:10px;color:var(--ink-sub);margin-left:4px;letter-spacing:.1em}
+.prod-price-soldout strong{font-size:14px;font-weight:500;color:var(--ink-sub);letter-spacing:.08em}
+.pdp-price-soldout{font-size:22px !important;font-weight:500;color:var(--ink-sub);letter-spacing:.05em}
+.pdp-sticky-price-soldout strong{font-size:13px !important;color:var(--ink-sub);letter-spacing:.05em}
 .prod-arrow{font-size:18px;color:var(--sky-deep);transition:.2s}
 .prod:hover .prod-arrow{transform:translateX(6px)}
 

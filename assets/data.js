@@ -20,6 +20,8 @@
                : Math.round(incl / (1 + rate));
     return { incl, excl, taxAmount: incl - excl };
   }
+  function isSoldOut(p){ return p.stockStatus === 'sold_out'; }
+  const SOLD_OUT_LABEL = 'ただいま売り切れ中';
   function escapeHtml(s){
     if (!s) return '';
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -72,7 +74,9 @@
     <div class="prod-maker">${escapeHtml(p.maker)}</div>
     <div class="prod-desc">${escapeHtml(p.shortDescription || '')}</div>
     <div class="prod-bottom">
-      <div class="prod-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>
+      ${isSoldOut(p)
+        ? `<div class="prod-price prod-price-soldout"><strong>${SOLD_OUT_LABEL}</strong></div>`
+        : `<div class="prod-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>`}
       <span class="prod-arrow">→</span>
     </div>
   </div>
@@ -94,7 +98,9 @@
     <div class="prod-cat">${escapeHtml(p.category)}</div>
     <div class="prod-name">${escapeHtml(p.name)}</div>
     <div class="prod-maker">${escapeHtml(p.maker)}</div>
-    <div class="prod-bottom"><div class="prod-price"><strong>${yen(priceParts(p).incl)}</strong><span>税込</span></div><span class="prod-arrow">→</span></div>
+    <div class="prod-bottom">${isSoldOut(p)
+        ? `<div class="prod-price prod-price-soldout"><strong>${SOLD_OUT_LABEL}</strong></div>`
+        : `<div class="prod-price"><strong>${yen(priceParts(p).incl)}</strong><span>税込</span></div>`}<span class="prod-arrow">→</span></div>
   </div>
 </a>`;
     },
@@ -102,16 +108,23 @@
     /* === Detail (PDP) rendering === */
     renderPDP(p){
       const price = priceParts(p);
+      const soldOut = isSoldOut(p);
       const hasVariants = Array.isArray(p.variants) && p.variants.length > 0;
       const external = p.externalPurchase && p.externalPurchase.url ? p.externalPurchase : null;
       const defaultLink = external ? external.url
                         : hasVariants ? (p.variants[0].paymentLink || p.paymentLink)
                         : p.paymentLink;
-      // 決済リンクが未設定 (空 / 「REPLACE_」 placeholder) なら CTA を無効化して 「準備中」 表示にする
-      const isLinkReady = defaultLink && !/REPLACE_/.test(defaultLink) && defaultLink !== '#';
+      // 売り切れ中 or 決済リンクが未設定 (空 / 「REPLACE_」 placeholder) なら CTA を無効化する
+      const isLinkReady = !soldOut && defaultLink && !/REPLACE_/.test(defaultLink) && defaultLink !== '#';
       const ctaLabel = external ? `${external.ctaLabel || (external.siteName + ' 公式サイトで購入する')} ↗`
                      : 'この商品を注文する →';
       const stickyLabel = external ? `${external.siteName || '公式サイト'}で購入 ↗` : '注文する →';
+      const disabledCtaLabel = soldOut ? SOLD_OUT_LABEL
+                             : external ? '販売パートナー様の公式サイト URL 準備中'
+                             : '準備中 — まもなく販売開始';
+      const disabledCtaTitle = soldOut ? SOLD_OUT_LABEL
+                             : external ? '販売パートナー様の公式サイト URL 準備中'
+                             : '決済リンクが商工会議所より発行され次第、注文可能になります';
       const ctaAttrs = external ? 'target="_blank" rel="noopener"' : '';
       const variantsHtml = hasVariants ? `
     <div class="pdp-variants" data-pdp-variants>
@@ -136,7 +149,17 @@
         `<div class="pdp-thumb${i===0?' active':''}" data-src="${escapeHtml(src)}"><img src="${escapeHtml(src)}" alt=""></div>`
       ).join('') : '';
       const badgeHtml = p.badge ? `<div class="badge">${escapeHtml(p.badge)}</div>` : '';
-      const shippingHtml = (p.shippingFee && p.shippingFee > 0) ? `全国一律 ¥${p.shippingFee.toLocaleString('ja-JP')}（地域により異なる場合あり）` : '送料無料（全国一律）';
+      const hasShippingFee = p.shippingFee && p.shippingFee > 0;
+      const hasFreeThreshold = p.freeShippingThreshold && p.freeShippingThreshold > 0;
+      const shippingHtml = hasShippingFee
+        ? (hasFreeThreshold
+            ? `全国一律 ${yen(p.shippingFee)}（税込）／ ${yen(p.freeShippingThreshold)}以上のご購入で送料無料`
+            : `全国一律 ${yen(p.shippingFee)}（税込）`)
+        : '送料無料（全国一律）';
+      const priceShippingLabel = hasShippingFee
+        ? (hasFreeThreshold ? `送料 ${yen(p.shippingFee)}（${yen(p.freeShippingThreshold)}以上で無料）` : `送料 ${yen(p.shippingFee)}`)
+        : '送料無料';
+      const orderUnitHtml = p.orderUnitText ? `<dl><dt>ご購入単位</dt><dd>${escapeHtml(p.orderUnitText)}</dd></dl>` : '';
 
       return `
 <div style="background:var(--sky-pale);padding:18px 24px;font-size:11px;letter-spacing:.2em;color:var(--ink-sub)">
@@ -161,9 +184,11 @@
     <div class="pdp-maker">${escapeHtml(p.maker)}</div>
 
     <div class="pdp-price">
-      <strong>${yen(price.incl)}</strong>
-      <span class="unit">税込（うち消費税 ${yen(price.taxAmount)} ／ 税抜 ${yen(price.excl)}）</span>
-      <span class="tax">送料無料</span>
+      ${soldOut
+        ? `<strong class="pdp-price-soldout">${SOLD_OUT_LABEL}</strong>`
+        : `<strong>${yen(price.incl)}</strong>
+           <span class="unit">税込（うち消費税 ${yen(price.taxAmount)} ／ 税抜 ${yen(price.excl)}）</span>
+           <span class="tax">${escapeHtml(priceShippingLabel)}</span>`}
     </div>
 
     ${variantsHtml}
@@ -177,12 +202,13 @@
       <div class="pdp-actions">
         ${isLinkReady
           ? `<a class="btn-cart" href="${escapeHtml(defaultLink)}" data-buy-link ${ctaAttrs}>${escapeHtml(ctaLabel)}</a>`
-          : `<button class="btn-cart btn-cart-disabled" disabled title="${external ? '販売パートナー様の公式サイト URL 準備中' : '決済リンクが商工会議所より発行され次第、注文可能になります'}">準備中 — まもなく販売開始</button>`}
+          : `<button class="btn-cart btn-cart-disabled" disabled title="${escapeHtml(disabledCtaTitle)}">${escapeHtml(disabledCtaLabel)}</button>`}
         <button class="btn-fav" aria-label="お気に入りに追加">♡</button>
       </div>
       <div class="pdp-meta-inline">
-        <span>製作 ${escapeHtml(p.leadTimeText || '—')}</span>
+        <span>お届け ${escapeHtml(p.leadTimeText || '—')}</span>
         <span>${escapeHtml(shippingHtml)}</span>
+        ${p.orderUnitText ? `<span>${escapeHtml(p.orderUnitText)}</span>` : ''}
       </div>
     </div>
 
@@ -190,8 +216,10 @@
 
     <div class="pdp-spec">
       ${specsHtml}
-      <dl><dt>製作日数目安</dt><dd>${escapeHtml(p.leadTimeText)}</dd></dl>
+      <dl><dt>お届け目安</dt><dd>${escapeHtml(p.leadTimeText)}</dd></dl>
       <dl><dt>送料</dt><dd>${escapeHtml(shippingHtml)}</dd></dl>
+      ${orderUnitHtml}
+      ${external && external.contactEmail ? `<dl><dt>本商品のお問い合わせ</dt><dd><a href="mailto:${escapeHtml(external.contactEmail)}" style="color:var(--sky-deep);text-decoration:underline">${escapeHtml(external.contactEmail)}</a>（${escapeHtml(external.siteName || '販売元')} 様）</dd></dl>` : ''}
     </div>
 
     ${p.note ? `<div class="pdp-note">${p.note}</div>` : ''}
@@ -202,11 +230,13 @@
   <div class="pdp-sticky-inner">
     <div class="pdp-sticky-info">
       <div class="pdp-sticky-name">${escapeHtml(p.name)}</div>
-      <div class="pdp-sticky-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>
+      ${soldOut
+        ? `<div class="pdp-sticky-price pdp-sticky-price-soldout"><strong>${SOLD_OUT_LABEL}</strong></div>`
+        : `<div class="pdp-sticky-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>`}
     </div>
     ${isLinkReady
       ? `<a class="pdp-sticky-cta" href="${escapeHtml(defaultLink)}" data-buy-link ${ctaAttrs}>${escapeHtml(stickyLabel)}</a>`
-      : `<button class="pdp-sticky-cta pdp-sticky-cta-disabled" disabled>準備中</button>`}
+      : `<button class="pdp-sticky-cta pdp-sticky-cta-disabled" disabled>${escapeHtml(soldOut ? SOLD_OUT_LABEL : '準備中')}</button>`}
   </div>
 </div>
 
