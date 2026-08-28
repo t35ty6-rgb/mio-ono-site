@@ -204,7 +204,26 @@
       "currency": "JPY",
       "shippingFee": 900,
       "freeShippingThreshold": 7000,
-      "orderUnitText": "3本または6本単位でご購入いただけます（1本単位のご注文は承れません）",
+      "orderUnitText": "3本セット または 6本セット でご購入いただけます",
+      "variantLabel": "本数",
+      "variants": [
+        {
+          "key": "3pack",
+          "label": "3本セット",
+          "sublabel": "¥2,100（税込）",
+          "priceTaxIncluded": 2100,
+          "priceTaxExcluded": 1909,
+          "paymentLink": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414244395"
+        },
+        {
+          "key": "6pack",
+          "label": "6本セット",
+          "sublabel": "¥4,200（税込）",
+          "priceTaxIncluded": 4200,
+          "priceTaxExcluded": 3818,
+          "paymentLink": "https://ourbrewing.com/products/ono-meisui-lager?variant=44669414277163"
+        }
+      ],
       "leadTimeText": "ご注文から3〜5営業日でお届け（在庫がある場合）",
       "tag": "予約販売受付中",
       "tagStyle": "shu",

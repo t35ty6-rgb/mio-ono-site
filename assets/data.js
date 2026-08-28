@@ -130,15 +130,22 @@
     <div class="pdp-variants" data-pdp-variants>
       <div class="pdp-variants-label">${escapeHtml(p.variantLabel || 'カラー')}<span class="pdp-variants-selected" data-variant-selected>${escapeHtml(p.variants[0].label)}</span></div>
       <div class="pdp-variants-row">
-        ${p.variants.map((v,i) => `
-          <button type="button" class="pdp-variant${i===0?' active':''}" data-variant-key="${escapeHtml(v.key)}" data-variant-link="${escapeHtml(v.paymentLink)}" data-variant-label="${escapeHtml(v.label)}" aria-pressed="${i===0?'true':'false'}">
-            <span class="pdp-variant-swatch" style="background:${escapeHtml(v.swatch || '#ccc')}"></span>
+        ${p.variants.map((v,i) => {
+          const vInc = (v.priceTaxIncluded != null) ? v.priceTaxIncluded : null;
+          const vExc = (v.priceTaxExcluded != null) ? v.priceTaxExcluded : null;
+          const vRate = (p.taxRate || 0.10);
+          const vTax = (vInc != null && vExc != null) ? (vInc - vExc) : null;
+          const priceAttr = vInc != null ? `data-variant-price-incl="${vInc}" data-variant-price-excl="${vExc != null ? vExc : ''}" data-variant-price-tax="${vTax != null ? vTax : ''}"` : '';
+          const swatchHtml = v.swatch ? `<span class="pdp-variant-swatch" style="background:${escapeHtml(v.swatch)}"></span>` : '';
+          return `
+          <button type="button" class="pdp-variant${i===0?' active':''}${v.swatch ? '' : ' no-swatch'}" data-variant-key="${escapeHtml(v.key)}" data-variant-link="${escapeHtml(v.paymentLink)}" data-variant-label="${escapeHtml(v.label)}" ${priceAttr} aria-pressed="${i===0?'true':'false'}">
+            ${swatchHtml}
             <span class="pdp-variant-text">
               <span class="pdp-variant-name">${escapeHtml(v.label)}</span>
               ${v.sublabel ? `<span class="pdp-variant-sub">${escapeHtml(v.sublabel)}</span>` : ''}
             </span>
-          </button>
-        `).join('')}
+          </button>`;
+        }).join('')}
       </div>
     </div>` : '';
       const specsHtml = (p.specs || []).map(s =>
@@ -183,12 +190,12 @@
     <h1>${escapeHtml(p.name)}</h1>
     <div class="pdp-maker">${escapeHtml(p.maker)}</div>
 
-    <div class="pdp-price">
+    <div class="pdp-price" data-pdp-price data-shipping-fee="${hasShippingFee ? p.shippingFee : 0}" data-shipping-free-threshold="${hasFreeThreshold ? p.freeShippingThreshold : 0}">
       ${soldOut
         ? `<strong class="pdp-price-soldout">${SOLD_OUT_LABEL}</strong>`
-        : `<strong>${yen(price.incl)}</strong>
-           <span class="unit">税込（うち消費税 ${yen(price.taxAmount)} ／ 税抜 ${yen(price.excl)}）</span>
-           <span class="tax">${escapeHtml(priceShippingLabel)}</span>`}
+        : `<strong data-price-incl>${yen(price.incl)}</strong>
+           <span class="unit" data-price-unit>税込（うち消費税 ${yen(price.taxAmount)} ／ 税抜 ${yen(price.excl)}）</span>
+           <span class="tax" data-price-shipping>${escapeHtml(priceShippingLabel)}</span>`}
     </div>
 
     ${variantsHtml}
@@ -232,7 +239,7 @@
       <div class="pdp-sticky-name">${escapeHtml(p.name)}</div>
       ${soldOut
         ? `<div class="pdp-sticky-price pdp-sticky-price-soldout"><strong>${SOLD_OUT_LABEL}</strong></div>`
-        : `<div class="pdp-sticky-price"><strong>${yen(price.incl)}</strong><span>税込</span></div>`}
+        : `<div class="pdp-sticky-price"><strong data-sticky-price-incl>${yen(price.incl)}</strong><span>税込</span></div>`}
     </div>
     ${isLinkReady
       ? `<a class="pdp-sticky-cta" href="${escapeHtml(defaultLink)}" data-buy-link ${ctaAttrs}>${escapeHtml(stickyLabel)}</a>`
@@ -358,10 +365,24 @@ ${p.makerQuote ? `
       const zoomBtn = document.getElementById('pdp-zoom-btn');
       if (zoomBtn) zoomBtn.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 
-      // Variant swatch → swap buy link + highlight selected
+      // Variant selector → swap buy link + highlight selected + update price display if variant has priceTaxIncluded
       const variantBtns = document.querySelectorAll('.pdp-variant');
       const buyLinks = document.querySelectorAll('[data-buy-link]');
       const selectedLabel = document.querySelector('[data-variant-selected]');
+      const priceEl = document.querySelector('[data-pdp-price]');
+      const priceInclEl = document.querySelector('[data-price-incl]');
+      const priceUnitEl = document.querySelector('[data-price-unit]');
+      const priceShipEl = document.querySelector('[data-price-shipping]');
+      const stickyInclEl = document.querySelector('[data-sticky-price-incl]');
+      const fmtYen = n => '¥' + Number(n).toLocaleString('ja-JP');
+      const shippingFee = priceEl ? Number(priceEl.getAttribute('data-shipping-fee')||0) : 0;
+      const freeThreshold = priceEl ? Number(priceEl.getAttribute('data-shipping-free-threshold')||0) : 0;
+      const computeShipLabel = (incl) => {
+        if (!shippingFee) return '送料無料';
+        if (freeThreshold && incl >= freeThreshold) return `送料無料（${fmtYen(freeThreshold)}以上のため）`;
+        if (freeThreshold) return `送料 ${fmtYen(shippingFee)}（${fmtYen(freeThreshold)}以上で無料）`;
+        return `送料 ${fmtYen(shippingFee)}`;
+      };
       variantBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const link = btn.getAttribute('data-variant-link');
@@ -371,6 +392,16 @@ ${p.makerQuote ? `
           btn.setAttribute('aria-pressed','true');
           if (link) buyLinks.forEach(a => { a.setAttribute('href', link); });
           if (selectedLabel && label) selectedLabel.textContent = label;
+          const inclStr = btn.getAttribute('data-variant-price-incl');
+          if (inclStr) {
+            const incl = Number(inclStr);
+            const excl = Number(btn.getAttribute('data-variant-price-excl')||0);
+            const tax = Number(btn.getAttribute('data-variant-price-tax')||0);
+            if (priceInclEl) priceInclEl.textContent = fmtYen(incl);
+            if (priceUnitEl && excl && tax) priceUnitEl.textContent = `税込（うち消費税 ${fmtYen(tax)} ／ 税抜 ${fmtYen(excl)}）`;
+            if (priceShipEl) priceShipEl.textContent = computeShipLabel(incl);
+            if (stickyInclEl) stickyInclEl.textContent = fmtYen(incl);
+          }
         });
       });
     }
