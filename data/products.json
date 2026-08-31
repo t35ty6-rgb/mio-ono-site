@@ -191,7 +191,7 @@
     {
       "id": "prod_DEMO_lager",
       "slug": "lager",
-      "active": true,
+      "active": false,
       "name": "大野名水ラガー",
       "category": "BEVERAGE",
       "categoryJa": "クラフトビール",

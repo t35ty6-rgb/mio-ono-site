@@ -32,12 +32,6 @@
         ]
       }
     ],
-    "redirects": [
-      {
-        "source": "/lager",
-        "destination": "/product.html?slug=lager",
-        "type": 301
-      }
-    ]
+    "redirects": []
   }
 }
